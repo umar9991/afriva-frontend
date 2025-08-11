@@ -11,7 +11,7 @@ import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
 import OtpInput from '../../components/OtpInput'
 import BackButton from '../../components/BackButton'
-import EditableAvatar from '../../components/EditAbleAvatar'
+import EditAbleAvatar from '../../components/EditAbleAvatar'
 import ButtonImg from "../.././assets/Button.png"
 export default function SuccessfullyScreen() {
   return (

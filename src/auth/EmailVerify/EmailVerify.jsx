@@ -11,7 +11,7 @@ import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
 import OtpInput from '../../components/OtpInput'
 import BackButton from '../../components/BackButton'
-import EditableAvatar from '../../components/EditAbleAvatar'
+import EditAbleAvatar from "../../components/EditAbleAvatar";
 export default function EmailVerify() {
   return (
     <section className=" h-screen flex items-center justify-center sm:flex sm:items-center sm:justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
