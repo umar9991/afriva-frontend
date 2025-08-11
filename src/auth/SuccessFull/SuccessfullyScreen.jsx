@@ -9,9 +9,9 @@ import SideImage from '../../components/SideImage'
 import LoginImg from "../.././assets/Login-Side.png"
 import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
-import OtpInput from '../../components/OtpInput'
+import OtpInput from '../../components/OtpInput' 
 import BackButton from '../../components/BackButton'
-import EditAbleAvatar from "../../components/EditAbleAvatar";
+import EditAbleAvatar from "@/components/EditAbleAvatar";
 import ButtonImg from "../.././assets/Button.png"
 export default function SuccessfullyScreen() {
   return (
