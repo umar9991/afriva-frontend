@@ -2,7 +2,7 @@
 import React from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 
-import LoginScreen from "../auth/login/loginScreen"
+import LoginScreen from "../auth/login/LoginScreen"
 import SignUp from "../auth/SignUp/SignUp"
 import EmailVerify from "../auth/emailVerify/EmailVerify"
 import SetUpProfile from "../auth/SetUpProfile/SetUpProfile"
