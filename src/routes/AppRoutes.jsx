@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom"
 
 import LoginScreen from "../auth/login/LoginScreen"
 import SignUp from "../auth/SignUp/SignUp"
-import EmailVerify from "../auth/emailVerify/EmailVerify"
+import EmailVerify from "../auth/EmailVerify/EmailVerify"
 import SetUpProfile from "../auth/SetUpProfile/SetUpProfile"
 import SetUpAvatar from "../auth/SetUpProfile/SetUpAvatar"
 import SuccessfullyScreen from "../auth/SuccessFull/SuccessfullyScreen"
