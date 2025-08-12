@@ -1,6 +1,5 @@
 import React from 'react'
-import BgPic from '../../assets/BG-Home.png'
-import CustomButton from '../../components/CustomButton'
+import BgPic from '../../assets/BgImg.png'
 import Versace from '../../assets/versace.png'
 import Zara from '../../assets/zara.png'
 import Gucci from '../../assets/gucci.png'
