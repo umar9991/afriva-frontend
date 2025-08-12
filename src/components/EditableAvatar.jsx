@@ -1,9 +1,9 @@
 import React from "react";
 import AvatarImg from "../assets/avatar.png";
 
-const EditAbleAvatar = ({ onEdit }) => {
+export default function EditAbleAvatar({ onEdit }) {
   return (
-    <div className="w-[140.47px] h-[140.47px] relative flex  justify-center mb-[20px]">
+    <div className="w-[140.47px] h-[140.47px] relative flex justify-center mb-[20px]">
       <img
         src={AvatarImg}
         alt="avatar"
@@ -31,6 +31,4 @@ const EditAbleAvatar = ({ onEdit }) => {
       </button>
     </div>
   );
-};
-
-export default EditAbleAvatar;
+}

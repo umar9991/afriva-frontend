@@ -24,7 +24,7 @@ export default function SetUpAvatar() {
    <CustomTextField placeholder="Enter brand name"/>
    <CustomLabel text="Phone number"/>
    <CustomTextField  placeholder="Enter number"/>
-   <CustomButton label='Complete' to='/success'/>
+   <CustomButton label='Complete' to='/main-home'/>
    </div>
   <div>
     <SideImage src={SignUpImg}/>
