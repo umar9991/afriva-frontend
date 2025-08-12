@@ -3,13 +3,11 @@ import CustomTextField from '../../components/CustomTextField'
 import CustomLabel from '../../components/CustomLabel'
 import CustomHeading from '../../components/CustomHeading'
 import SubHeading from '../../components/SubHeading'
-import AuthRedirectText from '../../components/AuthRedirectText'
 import Logo from '../../components/Logo'
 import SideImage from '../../components/SideImage'
 import SignUpImg from "../.././assets/SignUp-Side.png"
-import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
-import EditableAvatar from '../../components/EditAbleAvatar'
+import AvatarImg from '../../assets/avatar.png'
 
 export default function SetUpAvatar() {
   return (
