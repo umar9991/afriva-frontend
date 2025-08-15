@@ -26,9 +26,7 @@ export default function Content() {
     <span className="text-white text-lg font-semibold">Shop Now</span>
   </button>
 
-  {/* Stats Section */}
   <div className="grid grid-cols-2 gap-6 sm:flex sm:justify-start sm:items-start sm:gap-8">
-  {/* First two items in first row */}
   <div className="flex flex-col gap-1 sm:gap-2 text-center sm:text-left">
     <span className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-black">200+</span>
     <span className="text-black/60 text-base leading-snug">International Brands</span>
@@ -38,7 +36,6 @@ export default function Content() {
     <span className="text-black/60 text-base leading-snug">High-Quality Products</span>
   </div>
   
-  {/* Third item in second row - centered */}
   <div className="col-span-2 flex flex-col gap-1 sm:gap-2 text-center sm:text-left sm:col-auto">
     <span className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-black">30,000+</span>
     <span className="text-black/60 text-base leading-snug">Happy Customers</span>

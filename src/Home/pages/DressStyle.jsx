@@ -62,7 +62,7 @@ export default function DressStyle() {
     </div>
    </div>
   <div className=" flex flex-col items-center justify-center gap-[16px] 
-  mt-[40px] mb-[80px] px-[20px]
+  mt-[40px] mb-[80px] mx-[20px]
   
   md:grid md:grid-cols-2 md:place-items-center md:px-[20px]
   

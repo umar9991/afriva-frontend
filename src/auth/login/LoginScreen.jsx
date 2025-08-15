@@ -10,7 +10,6 @@ import LoginImg from "../.././assets/Login-Side.png"
 import PasswordField from '../../components/PasswordField'
 import { Link } from "react-router-dom";
 import CustomButton from '../../components/CustomButton'
-import StepItem from '../../components/StepItems'
 export default function LoginScreen() {
   return (
     <section className="h-screen flex items-center justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
@@ -19,7 +18,7 @@ export default function LoginScreen() {
     <CustomHeading text="Login" />
     <SubHeading text="Welcome to Afriva - Login to your account"/>
    <CustomLabel text="Email"/>
-   <CustomTextField placeholder="Enter your email"/>
+   <CustomTextField placeholder="Enter your email"/> 
    <CustomLabel text="Password"/>
    <PasswordField  placeholder="Enter password"/>
 <Link to="/forgotMain">

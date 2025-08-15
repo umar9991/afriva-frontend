@@ -7,7 +7,6 @@ import AuthRedirectText from '../../components/AuthRedirectText'
 import Logo from '../../components/Logo'
 import SideImage from '../../components/SideImage'
 import SignUpImg from "../.././assets/SignUp-Side.png"
-import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
 export default function SetUpProfile() {
   return (
