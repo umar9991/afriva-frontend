@@ -23,7 +23,7 @@ function AppRoutes() {
   <Route path="/" element={<LoginScreen />} />
   <Route path="/login" element={<LoginScreen />} />
   <Route path="/register" element={<SignUp />} />
-  <Route path="/email-verify" element={<EmailVerify />} />
+  <Route path="/email-verify" element={<EmailVerify />} /> 
   <Route path="/setup-profile" element={<SetUpProfile />} />
   <Route path="/setup-avatar" element={<SetUpAvatar />} />
   <Route path="/success" element={<ForgotPassword />} />

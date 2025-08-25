@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
-export default function CustomTextField({ placeholder }) {
+export default function PasswordField({ placeholder, value, onChange }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => setShowPassword(prev => !prev);
@@ -11,9 +11,15 @@ export default function CustomTextField({ placeholder }) {
       <input
         type={showPassword ? "text" : "password"}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}    
         className="flex-1 bg-transparent outline-none text-black text-[13px] font-medium font-['Inter'] leading-[14px]"
       />
-      <button onClick={togglePassword} type="button" className="focus:outline-none">
+      <button
+        onClick={togglePassword}
+        type="button"
+        className="focus:outline-none"
+      >
         {showPassword ? (
           <EyeSlashIcon className="h-5 w-5 text-gray-600" />
         ) : (

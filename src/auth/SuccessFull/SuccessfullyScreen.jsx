@@ -6,9 +6,9 @@ import SubHeading from '../../components/SubHeading'
 import AuthRedirectText from '../../components/AuthRedirectText'
 import Logo from '../../components/Logo'
 import SideImage from '../../components/SideImage'
-import LoginImg from "../.././assets/Login-Side.png"
+import LoginImg from "../.././assets/Login-Side.png"     
 import PasswordField from '../../components/PasswordField'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '../../components/CustomButton'      
 import OtpInput from '../../components/OtpInput' 
 import BackButton from '../../components/BackButton'
 import ButtonImg from "../.././assets/Button.png"

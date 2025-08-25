@@ -66,7 +66,7 @@ export default function DressStyle() {
   
   md:grid md:grid-cols-2 md:place-items-center md:px-[20px]
   
-  lg:grid lg:grid-cols-2 lg:gap-[16px] lg:items-center lg:px-[100px]
+  lg:grid lg:grid-cols-2 lg:gap-[16px] lg:items-center lg:px-[100px] lg:mx-[0px]
   
   xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-[16px] xl:px-[100px] ">
     <TestimonialCard />
