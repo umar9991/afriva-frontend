@@ -8,10 +8,9 @@ import calvin from '../../assets/calvin.png'
 export default function Content() {
   return (
     <>
-    <section  className="h-screen bg-cover w-full max-h-[703px] pl-[16px] md:pl-[100px] pt-[30px]"
+    <section  className="h-screen bg-cover w-full max-h-[703px] pl-[16px] pt-[30px]"
       style={{ backgroundImage: `url(${BgPic})`  } } >
-       <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-[39px]">
-  {/* Main Heading and Description */}
+       <div className="w-full px-4 sm:px-6 lg:px-[100px] py-8 sm:py-12 lg:py-[39px]">
   <div className="w-full max-w-[577px] flex flex-col gap-4 sm:gap-6">
     <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-bold text-black leading-tight sm:leading-tight lg:leading-tight">
       FIND CLOTHES THAT MATCHES YOUR STYLE
@@ -21,7 +20,6 @@ export default function Content() {
     </p>
   </div>
 
-  {/* Shop Now Button */}
   <button className="mt-6 sm:mt-[24px] mb-6 sm:mb-[38px] w-full sm:w-[210px] h-[52px] cursor-pointer px-4 sm:px-[54px] py-4 bg-[#8BC53F] hover:bg-[#7CB235] rounded-[62px] flex justify-center items-center gap-3 transition-colors duration-200">
     <span className="text-white text-lg font-semibold">Shop Now</span>
   </button>

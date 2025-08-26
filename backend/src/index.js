@@ -4,9 +4,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const productRoutes = require("./routes/productRoutes");
 
 const authRoutes = require("./routes/authRoutes");
-// import authRoutes from "./routes/authRoutes.js";
 
 
 const app = express();
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(cors({
   origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET","PATCH", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 app.use(helmet());
@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from the server' }); 

@@ -11,5 +11,4 @@ export const signin = (userData) => API.post("/signin", userData);
 
 export const signout = () => API.post("/signout");
 
-
 export const sendVerificationCode = (email) => API.patch("/sendVerificationCode", { email });

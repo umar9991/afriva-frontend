@@ -9,7 +9,7 @@ import SignUpImg from "../.././assets/SignUp-Side.png"
 import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
 import React, { useState } from "react";
-import { signup } from '../../../backend/services/authService'
+import { signup } from '../../services/authService'
 import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const [email, setEmail] = useState("");

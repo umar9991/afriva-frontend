@@ -12,10 +12,10 @@ const postSchema = mongoose.Schema({
         trim: true,
     },
     userId: {
-        type: mangoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
 }, { timestamps: true })
 
-module.exports = mangoose.model('Post', postSchema);
+module.exports = mongoose.model('Post', postSchema);

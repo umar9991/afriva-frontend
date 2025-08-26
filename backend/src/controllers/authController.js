@@ -4,7 +4,6 @@ const User = require("../models/userModels");
 const { doHash, doHashValidaton, hmacProcess } = require("../utils/hashing");
 const transport = require('../middlewares/sendMail');
 
-
 exports.signup = async (req, res) => {
   console.log("in signup======>",req.body);
   
@@ -139,7 +138,7 @@ exports.signout = async(req, res)=>{
 exports.sendVerificationCode = async (req, res) => {
     const { email } = req.body;
     try {
-      const existingUser = await User.findOne({ email }); // ✅ await lagaya
+      const existingUser = await User.findOne({ email });
   
       if (!existingUser) {
         return res.status(404).json({
@@ -161,7 +160,7 @@ exports.sendVerificationCode = async (req, res) => {
         from: process.env.NODE_CODE_SENDING_EMAIL_ADDRESS,
         to: existingUser.email,
         subject: "Verification Code",
-        html: `<h1>${codeValue}</h1>`, // ✅ template string + proper closing tag
+        html: `<h1>${codeValue}</h1>`,
       });
   
       if (info.accepted[0] === existingUser.email) {

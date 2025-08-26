@@ -54,7 +54,6 @@ export default function LoginScreen() {
      to="/main-home"  
     onClick={handleLogin}/>
 
-    {/* <button onClick={handleLogin}> <label htmlFor="">Continue</label></button> */}
    <AuthRedirectText question="Don’t have an account?"
   linkText="Sign up" to="/register" 
   onClick={() => console.log("Navigate to signup")}/>
