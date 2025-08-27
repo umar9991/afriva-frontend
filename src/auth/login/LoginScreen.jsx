@@ -34,35 +34,103 @@ export default function LoginScreen() {
     }
   };
   return (
-    <section className="h-screen flex items-center justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
-   <div className="">
-     <Logo className=""/>
-    <CustomHeading text="Login" />
-    <SubHeading text="Welcome to Afriva - Login to your account"/>
-   <CustomLabel text="Email"/>
-   <CustomTextField placeholder="Enter your email" value={email}
-              onChange={(e) => setEmail(e.target.value)}/> 
-   <CustomLabel text="Password"/>
-   <PasswordField  placeholder="Enter password"  value={password}
-              onChange={(e) => setPassword(e.target.value)}/>
-<Link to="/forgotMain">
-  <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer">
-    Forgot Password?
-  </div>
-</Link>
-   <CustomButton label='Log In'
-     to="/main-home"  
-    onClick={handleLogin}/>
-
-   <AuthRedirectText question="Don’t have an account?"
-  linkText="Sign up" to="/register" 
-  onClick={() => console.log("Navigate to signup")}/>
+    <section className="h-screen flex items-center justify-center relative md:flex-row md:justify-between md:pl-[63px] lg:pl-[63px]">
   
-   </div>
-  <div>
-    <SideImage src={LoginImg}/>
-  </div>
-</section>
-
+    {/* Mobile Layout - Full Screen Background with Card Overlay */}
+    <div className="md:hidden w-full h-full relative">
+      {/* Full Screen Background Image */}
+      <div className="absolute inset-0">
+        <SideImage src={LoginImg} className="w-full h-full object-cover" />
+      </div>
+      
+      {/* Card Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
+          <Logo className="" />
+          <CustomHeading text="Login" />
+          <SubHeading text="Welcome to Afriva - Login to your account" />
+          
+          <CustomLabel text="Email" />
+          <CustomTextField 
+            placeholder="Enter your email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          
+          <CustomLabel text="Password" />
+          <PasswordField  
+            placeholder="Enter password"  
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          
+          <Link to="/forgotMain">
+            <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer">
+              Forgot Password?
+            </div>
+          </Link>
+          
+          <CustomButton 
+            label='Log In'
+            to="/main-home"
+            onClick={handleLogin}
+          />
+          
+          <AuthRedirectText 
+            question="Don't have an account?"
+            linkText="Sign up" 
+            to="/register"
+            onClick={() => console.log("Navigate to signup")}
+          />
+        </div>
+      </div>
+    </div>
+  
+    {/* Desktop Layout - Original Side by Side */}
+    <div className="hidden md:block">
+      <Logo className="" />
+      <CustomHeading text="Login" />
+      <SubHeading text="Welcome to Afriva - Login to your account" />
+      
+      <CustomLabel text="Email" />
+      <CustomTextField 
+        placeholder="Enter your email" 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      
+      <CustomLabel text="Password" />
+      <PasswordField  
+        placeholder="Enter password"  
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      
+      <Link to="/forgotMain">
+        <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer">
+          Forgot Password?
+        </div>
+      </Link>
+      
+      <CustomButton 
+        label='Log In'
+        to="/main-home"
+        onClick={handleLogin}
+      />
+      
+      <AuthRedirectText 
+        question="Don't have an account?"
+        linkText="Sign up" 
+        to="/register"
+        onClick={() => console.log("Navigate to signup")}
+      />
+    </div>
+  
+    {/* Desktop Right Side Image */}
+    <div className="hidden md:block">
+      <SideImage src={LoginImg} />
+    </div>
+    
+  </section>
   )
 }
