@@ -2,16 +2,16 @@
   "name": "afriva",
   "version": "0.0.0",
   "private": true,
- "scripts": {
-  "dev:server": "nodemon backend/src/index.js",
-  "dev:client": "vite",
-  "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-  "build": "vite build",
-  "preview": "vite preview",
-  "populate-db": "node backend/src/scripts/populateProducts.js"
-}
-,
+  "scripts": {
+    "dev:server": "nodemon backend/src/index.js",
+    "dev:client": "vite",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "populate-db": "node backend/src/scripts/populateProducts.js"
+  },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.1",
     "concurrently": "^9.2.0",
     "nodemon": "^3.1.10",
     "vite": "^7.1.3"
