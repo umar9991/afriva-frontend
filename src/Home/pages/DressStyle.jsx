@@ -8,7 +8,7 @@ import ArrowLeft from '../../assets/arrow-left.png'
 import ArrowRight from '../../assets/arrow-right.png'
 import TestimonialCard from '../../components/TestimonialCard'
 import EmailImg from '../../assets/emailBox.png'
-
+ 
 
 export default function DressStyle() {
   return (

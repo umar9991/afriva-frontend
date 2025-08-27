@@ -12,7 +12,7 @@ export default function SetUpProfile() {
   return (
     <section className="px-[20px] h-screen flex items-center justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
    <div className="">
-     <Logo className=""/>
+     <Logo className=""/> 
     <CustomHeading text="Verification" />
     <SubHeading text="Select your country and verify your identity to continue."/>
    <CustomLabel text="Account Type"/>
