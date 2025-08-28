@@ -11,58 +11,52 @@ import Circle1 from '../../../assets/circle.png'
 import Bg from '../../../assets/BG.png'
 import EmailImg from '../../../assets/email.png'
 import React, { useState } from "react";
-import { sendVerificationCode } from '../../../services/authService'
-import { useNavigate } from "react-router-dom";
-
 
 export default function YourDetail() {
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = async () => {
-    console.log("Debug=======>")
-    console.log(email)
-    try {
-      const res = await sendVerificationCode(email);
-      alert(res.data.message);
-      navigate("/forgotMain/check-email");
-    } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Login failed");
-    }
-  };
+ 
   return (
     <>
       <section
-        className="h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain max-w-[769px] max-h-[768px]"
+        className="min-h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain p-4 sm:p-6 md:p-8"
         style={{
           backgroundImage: `url(${Bg})`,
           display: 'flex',
           textAlign: 'start',
         }}
       >
-        <div>
-          <div className="p-[20px] flex justify-center mb-[24px] mt-[30px]">
-            <img className="h-[24px] w-[24px]" src={EmailImg} alt="" />
+        <div className="w-full max-w-md mx-auto">
+          <div className="p-4 sm:p-5 flex justify-center mb-6 mt-8">
+            <img className="h-6 w-6 sm:h-8 sm:w-8" src={EmailImg} alt="" />
           </div>
 
-          <div className="text-center">
+          <div className="text-center mb-6">
             <CustomHeading text="Forgot password?" />
           </div>
 
-          <SubHeading text="No worries, we’ll send you reset instructions." />
+          <SubHeading text="No worries, we'll send you reset instructions." />
 
-          <CustomLabel text="Email" />
-          <CustomTextField placeholder="Enter your email"value={email}
-              onChange={(e) => setEmail(e.target.value)} />
+          <div className="mt-6">
+            <CustomLabel text="Email" />
+            <CustomTextField 
+              placeholder="Enter your email"
+             
+            />
+          </div>
 
-          <CustomButton label="Reset password" to="/forgotMain/check-email" onClick={handleLogin} />
+          <div className="mt-6">
+            <CustomButton 
+              label="Reset password" 
+              to='/forgotMain/check-email'
+            />
+          </div>
 
-          <BackButton />
+          <div className="mt-4">
+            <BackButton />
+          </div>
 
-          <div className="flex justify-center items-center text-center">
+          <div className="flex justify-center items-center text-center mt-16 sm:mt-20">
             <img
-              className="max-h-[10px] max-w-[88px] mt-[80px]"
+              className="max-h-3 max-w-22 sm:max-h-4 sm:max-w-24"
               src={Circle1}
               alt=""
             />

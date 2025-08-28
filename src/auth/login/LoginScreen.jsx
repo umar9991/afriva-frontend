@@ -36,16 +36,13 @@ export default function LoginScreen() {
   return (
     <section className="h-screen flex items-center justify-center relative md:flex-row md:justify-between md:pl-[63px] lg:pl-[63px]">
   
-    {/* Mobile Layout - Full Screen Background with Card Overlay */}
     <div className="md:hidden w-full h-full relative">
-      {/* Full Screen Background Image */}
       <div className="absolute inset-0">
         <SideImage src={LoginImg} className="w-full h-full object-cover" />
       </div>
       
-      {/* Card Overlay */}
       <div className="absolute inset-0 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
+        <div className="bg-white rounded-2xl p-6 w-full max-w-sm">
           <Logo className="" />
           <CustomHeading text="Login" />
           <SubHeading text="Welcome to Afriva - Login to your account" />

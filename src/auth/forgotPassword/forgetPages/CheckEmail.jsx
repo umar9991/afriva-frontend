@@ -12,38 +12,55 @@ import Circle2 from '../../../assets/circle2.png'
 import EmailImg from '../../../assets/email.png'
 import Bg from '../../../assets/BG.png'
 
-
 export default function CheckEmail() {
   return (
-  <>
-    <section
-        className="p-[20px] h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain max-w-[769px] max-h-[768px]"
+    <>
+      <section
+        className="min-h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain p-4 sm:p-6 md:p-8"
         style={{ backgroundImage: `url(${Bg})`, display: 'flex', textAlign: 'start' }}
       >
-        <div>
-           <div className="flex justify-center mb-[24px] mt-[30px]">
-             <img className="h-[24px] w-[24px]" src={EmailImg} alt="" />
-           </div>
-          <div className="text-center">
+        <div className="w-full max-w-md mx-auto text-center">
+          <div className="flex justify-center mb-6 mt-8">
+            <img className="h-6 w-6 sm:h-8 sm:w-8" src={EmailImg} alt="" />
+          </div>
+          
+          <div className="mb-6">
             <CustomHeading text="Check your email" />
           </div>
-          <div className="max-w-[360px] mb-[32px] justify-center text-center">
+          
+          <div className="max-w-[360px] mx-auto mb-8 text-center">
             <span className="text-[#475467] text-base font-normal leading-normal">
               We sent a password reset link to
             </span>
             <br />
-            <span className="text-[#475467] font-bold text-base">olivia@proadvisor.com</span>
+            <span className="text-[#475467] font-bold text-base">
+              olivia@proadvisor.com
+            </span>
           </div>
 
-          <CustomButton label="Got it" to="/forgotMain/" />
-          <AuthRedirectText
-            question="Didn’t receive the email?"
-            linkText="Click to resend"
-            to="/forgotSideBar"
-          />
-          <BackButton />
-               <div className="flex justify-center items-center text-center "><img className="max-h-[10px] max-w-[88px] mt-[80px] " src={Circle2} alt="" /></div>
+          <div className="mb-6">
+            <CustomButton label="Got it" to="/forgotMain/choose-password" />
+          </div>
           
+          <div className="mb-6">
+            <AuthRedirectText
+              question="Didn't receive the email?"
+              linkText="Click to resend"
+              to="/forgotSideBar"
+            />
+          </div>
+          
+          <div className="mb-8">
+            <BackButton />
+          </div>
+          
+          <div className="flex justify-center items-center">
+            <img 
+              className="max-h-3 max-w-22 sm:max-h-4 sm:max-w-24" 
+              src={Circle2} 
+              alt="" 
+            />
+          </div>
         </div>
       </section>
     </>

@@ -13,3 +13,9 @@ export const signout = () => API.post("/signout");
 
 
 export const sendVerificationCode = (email) => API.patch("/sendVerificationCode", { email });
+export const verifyOtp = (email, otp) =>
+  API.post("/verify-otp", {
+    email,
+    otp,
+  });
+

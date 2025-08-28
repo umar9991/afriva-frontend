@@ -1,58 +1,84 @@
 import React from 'react'
-import Logo from '../../../components/Logo'
 import CustomTextField from '../../../components/CustomTextField'
 import CustomLabel from '../../../components/CustomLabel'
 import CustomHeading from '../../../components/CustomHeading'
 import SubHeading from '../../../components/SubHeading'
 import PasswordField from '../../../components/PasswordField'
 import CustomButton from '../../../components/CustomButton'
-import AuthRedirectText from '../../../components/AuthRedirectText'
 import BackButton from '../../../components/BackButton'
 import Circle3 from '../../../assets/circle3.png'
 import fImg from '../../../assets/ficon.png'
 import Bg from '../../../assets/BG.png'
 import CheckCircle from '../../../assets/check-circle.png'
 
-
 export default function CreatePassword() {
   return (
-  <>
-    <section
-        className="p-[20px] h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain max-w-[769px] max-h-[768px]"
+    <>
+      <section
+        className="min-h-screen flex items-center justify-center bg-no-repeat bg-center bg-contain p-4 sm:p-6 md:p-8"
         style={{ backgroundImage: `url(${Bg})`, display: 'flex', textAlign: 'start' }}
       >
-        <div>
-           <div className="flex justify-center mb-[24px] mt-[30px]">
-             <img className="h-[24px] w-[24px]" src={fImg} alt="" />
-           </div>
-          <div className="text-center">
-            <CustomHeading text="Set new password" />
-             <SubHeading text={'Your new password must be different\n to previously used passwords.'}/>
+        <div className="w-full max-w-sm sm:max-w-md mx-auto">
+          {/* Header Icon */}
+          <div className="flex justify-center mb-6 mt-4 sm:mt-8">
+            <img className="h-8 w-8 sm:h-10 sm:w-10" src={fImg} alt="Password icon" />
           </div>
-    <CustomLabel text="Password"/>
-       <PasswordField  placeholder="Enter password"/>
-       <CustomLabel text="Confirm Password"/>    
-       <PasswordField placeholder="Enter password"/>
-       <div className="flex flex-col gap-2 mb-4">
-        <div className="self-stretch inline-flex justify-start items-center gap-2">
-  <img src={CheckCircle} alt="check" className="w-[18px] h-[18px]" />
-  <div className="text-[#475467] text-sm font-normal font-['Inter'] leading-snug">
-    Must be at least 8 characters
-  </div>
-</div>
-<div className="self-stretch inline-flex justify-start items-center gap-2">
-  <img src={CheckCircle} alt="check" className="w-[18px] h-[18px]" />
-  <div className="text-[#475467] text-sm font-normal font-['Inter'] leading-snug">
-    Must be at least 8 characters
-  </div>
-</div>
-       </div>
-
-
-        <CustomButton label="Reset password" to="/forgotMain/success" />
-          <BackButton />
-               <div className="flex justify-center items-center text-center "><img className="max-h-[10px] max-w-[88px] mt-[80px] " src={Circle3} alt="" /></div>
           
+          {/* Header Text */}
+          <div className="text-center mb-6 sm:mb-8">
+            <CustomHeading text="Set new password" />
+            <div className="mt-2">
+              <SubHeading text={'Your new password must be different\n to previously used passwords.'}/>
+            </div>
+          </div>
+          
+          <div className="space-y-4 sm:space-y-6">
+            <div>
+              <CustomLabel text="Password"/>
+              <div className="mt-2">
+                <PasswordField placeholder="Enter password"/>
+              </div>
+            </div>
+            <div>
+              <CustomLabel text="Confirm Password"/>
+              <div className="mt-2">
+                <PasswordField placeholder="Enter password"/>
+              </div>
+            </div>
+          </div>
+          
+          <div className=" rounded-lg p-4">
+            <div className="text-sm text-gray-600 mb-3 font-medium">Password requirements:</div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <img src={CheckCircle} alt="check" className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <div className="text-[#475467] text-sm font-normal font-['Inter'] leading-snug">
+                  Must be at least 8 characters
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={CheckCircle} alt="check" className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <div className="text-[#475467] text-sm font-normal font-['Inter'] leading-snug">
+                  Must contain at least one number
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="space-y-4 sm:space-y-6 mb-8">
+            <CustomButton label="Reset password" to="/forgotMain/success" />
+            <BackButton />
+          </div>
+          
+          {/* Bottom Decoration */}
+          <div className="flex justify-center items-center">
+            <img 
+              className="h-3 w-20 sm:h-4 sm:w-24" 
+              src={Circle3} 
+              alt="Decoration" 
+            />
+          </div>
         </div>
       </section>
     </>

@@ -154,7 +154,8 @@ exports.sendVerificationCode = async (req, res) => {
         });
       }
   
-      const codeValue = Math.floor(Math.random() * 1000000).toString();
+      const codeValue = Math.floor(1000 + Math.random() * 9000).toString();
+
   
       let info = await transport.sendMail({
         from: process.env.NODE_CODE_SENDING_EMAIL_ADDRESS,
@@ -174,7 +175,7 @@ exports.sendVerificationCode = async (req, res) => {
   
         return res.status(200).json({
           success: true,
-          message: "Code sent!",
+          message: "Check your mail box.Verify code delivered to your inbox.",
         });
       }
   
@@ -184,6 +185,74 @@ exports.sendVerificationCode = async (req, res) => {
       });
     } catch (error) {
       console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  };
+  
+
+  exports.verifyOtp = async (req, res) => {
+    const { email, otp } = req.body;
+  
+    try {
+      const existingUser = await User.findOne({ email })
+        .select('+verificationCode +verificationCodeValidation');
+  
+      if (!existingUser) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found!",
+        });
+      }
+  
+      if (!existingUser.verificationCode) {
+        return res.status(400).json({
+          success: false,
+          message: "No verification code found. Please request a new code.",
+        });
+      }
+  
+      const now = Date.now();
+      const codeAge = now - existingUser.verificationCodeValidation;
+      const expiryTime = 10 * 60 * 1000; 
+  
+      if (codeAge > expiryTime) {
+        return res.status(400).json({
+          success: false,
+          message: "Verification code has expired. Please request a new code.",
+        });
+      }
+  
+      const hashedProvidedOtp = hmacProcess(
+        String(otp).trim(),
+        process.env.HMAC_VERIFICATION_CODE_SECRET
+      );
+  
+      if (hashedProvidedOtp !== existingUser.verificationCode) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid verification code!",
+        });
+      }
+  
+      existingUser.verified = true;
+      existingUser.verificationCode = undefined;
+      existingUser.verificationCodeValidation = undefined;
+      await existingUser.save();
+  
+      return res.status(200).json({
+        success: true,
+        message: "Email verified successfully!",
+        user: {
+          id: existingUser._id,
+          email: existingUser.email,
+          verified: existingUser.verified,
+        },
+      });
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
       return res.status(500).json({
         success: false,
         message: "Internal server error",

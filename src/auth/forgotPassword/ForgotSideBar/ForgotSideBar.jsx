@@ -17,43 +17,44 @@ export default function ForgotSideBar() {
 
   return (
     <>
-      <div className="hidden md:block pl-[44px] pt-[80px] bg-gray-50 max-w-[443px] h-screen">
-        <div className="mb-[64px]">
-          <Logo />
-        </div>
+     <div className="pl-4 md:pl-[44px] pt-6 md:pt-[80px] bg-gray-50 w-full md:max-w-[443px] h-auto md:h-screen">
+  <div className="mb-8 md:mb-[64px]">
+    <Logo />
+  </div>
 
-        <Link to="/forgotMain/your-detail">
-          <StepItem
-            img={ProfileImg}
-            title="Your details"
-            description="Please provide your name and email."
-          />
-        </Link>
+  <Link to="/forgotMain/your-detail">
+    <StepItem
+      img={ProfileImg}
+      title="Your details"
+      description="Please provide your name and email."
+    />
+  </Link>
 
-        <Link to="/forgotMain/check-email">
-          <StepItem
-            img={EmailImg}
-            title="Check your email"
-            description="Please check your email to get reset link."
-          />
-        </Link>
+  <Link to="/forgotMain/check-email">
+    <StepItem
+      img={EmailImg}
+      title="Check your email"
+      description="Please check your email to get reset link."
+    />
+  </Link>
 
-        <Link to="/forgotMain/choose-password">
-          <StepItem
-            img={PassImg}
-            title="Choose a password."
-            description="Choose a secure password."
-          />
-        </Link>
+  <Link to="/forgotMain/choose-password">
+    <StepItem
+      img={PassImg}
+      title="Choose a password."
+      description="Choose a secure password."
+    />
+  </Link>
 
-        <Link to="/forgotMain/success">
-          <StepItem
-            img={TickImg}
-            title="Successfully"
-            description="Go back to log in into your account."
-          />
-        </Link>
-      </div>
+  <Link to="/forgotMain/success">
+    <StepItem
+      img={TickImg}
+      title="Successfully"
+      description="Go back to log in into your account."
+    />
+  </Link>
+</div>
+
     </>
   );
 }
