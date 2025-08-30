@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import CustomHeading from '../../components/CustomHeading'
 import CasualImage from '../../assets/Casual.png'
 import Formal from '../../assets/Formal.png'
@@ -20,37 +21,45 @@ export default function DressStyle() {
 
   <div className="px-4 lg:px-16 pt-8 lg:pt-[60px] pb-[30px]">
     <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-5 mb-4 lg:mb-5">
-      <div className="w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden">
-        <img 
-          className="w-full h-full hover:scale-105 transition-transform duration-300" 
-          src={CasualImage} 
-          alt="Casual Dress Style" 
-        />
-      </div>
-      <div className="w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden">
-        <img 
-          className="w-full h-full hover:scale-105 transition-transform duration-300" 
-          src={Formal} 
-          alt="Formal Dress Style" 
-        />
-      </div>
+      {[CasualImage, Formal].map((img, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: idx * 0.1, duration: 0.5 }}
+          className={idx === 0 ? "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"}
+        >
+          <motion.img
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            className="w-full h-full"
+            src={img}
+            alt={idx === 0 ? 'Casual Dress Style' : 'Formal Dress Style'}
+          />
+        </motion.div>
+      ))}
     </div>
 
     <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-5">
-      <div className="w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden">
-        <img 
-          className="w-full h-full hover:scale-105 transition-transform duration-300" 
-          src={PartyImg} 
-          alt="Party Dress Style" 
-        />
-      </div>
-      <div className="w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden">
-        <img 
-          className="w-full h-full hover:scale-105 transition-transform duration-300" 
-          src={GymImg} 
-          alt="Gym Dress Style" 
-        />
-      </div>
+      {[PartyImg, GymImg].map((img, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: idx * 0.1, duration: 0.5 }}
+          className={idx === 0 ? "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"}
+        >
+          <motion.img
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            className="w-full h-full"
+            src={img}
+            alt={idx === 0 ? 'Party Dress Style' : 'Gym Dress Style'}
+          />
+        </motion.div>
+      ))}
     </div>
   </div>
 </section>
@@ -69,10 +78,17 @@ export default function DressStyle() {
   lg:grid lg:grid-cols-2 lg:gap-[16px] lg:items-center lg:px-[100px] lg:mx-[0px]
   
   xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-[16px] xl:px-[100px] ">
-    <TestimonialCard />
-     <TestimonialCard />
-      <TestimonialCard />
-       <TestimonialCard />
+    {[0,1,2,3].map((i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: i * 0.1, duration: 0.45 }}
+      >
+        <TestimonialCard />
+      </motion.div>
+    ))}
   </div>
   {/* <section className="w-full bg-[#efefef] mt-[80.42px]">
 

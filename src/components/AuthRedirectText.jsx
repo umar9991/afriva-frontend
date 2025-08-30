@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export default function AuthRedirectText({
   question = "Don’t have an account?",
   linkText = "Sign up",
-  to = "/register", // Add a default route
+  to = "/register",
 }) {
   const navigate = useNavigate()
 

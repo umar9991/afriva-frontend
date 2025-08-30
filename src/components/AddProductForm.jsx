@@ -38,7 +38,6 @@ export default function AddProductForm() {
       setMessage('Product added successfully!');
       setFormData({ name: '', image: '', price: '', rating: '' });
       
-      // Optionally refresh the page or emit an event to update the product list
       window.location.reload();
     } catch (error) {
       setMessage(error.response?.data?.message || 'Failed to add product');

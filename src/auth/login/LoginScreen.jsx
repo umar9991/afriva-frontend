@@ -10,7 +10,7 @@ import PasswordField from '../../components/PasswordField'
 import { Link } from "react-router-dom";
 import CustomButton from '../../components/CustomButton'
 import React, { useState } from "react";
-import { signin } from '../../../backend/services/authService'
+import { signin } from '../../services/authService'
 import { useNavigate } from "react-router-dom";
 
 
@@ -83,7 +83,6 @@ export default function LoginScreen() {
       </div>
     </div>
   
-    {/* Desktop Layout - Original Side by Side */}
     <div className="hidden md:block">
       <Logo className="" />
       <CustomHeading text="Login" />
@@ -123,7 +122,6 @@ export default function LoginScreen() {
       />
     </div>
   
-    {/* Desktop Right Side Image */}
     <div className="hidden md:block">
       <SideImage src={LoginImg} />
     </div>

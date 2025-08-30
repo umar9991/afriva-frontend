@@ -19,12 +19,10 @@ export default function CreatePassword() {
         style={{ backgroundImage: `url(${Bg})`, display: 'flex', textAlign: 'start' }}
       >
         <div className="w-full max-w-sm sm:max-w-md mx-auto">
-          {/* Header Icon */}
           <div className="flex justify-center mb-6 mt-4 sm:mt-8">
             <img className="h-8 w-8 sm:h-10 sm:w-10" src={fImg} alt="Password icon" />
           </div>
           
-          {/* Header Text */}
           <div className="text-center mb-6 sm:mb-8">
             <CustomHeading text="Set new password" />
             <div className="mt-2">
@@ -65,13 +63,11 @@ export default function CreatePassword() {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="space-y-4 sm:space-y-6 mb-8">
             <CustomButton label="Reset password" to="/forgotMain/success" />
             <BackButton />
           </div>
           
-          {/* Bottom Decoration */}
           <div className="flex justify-center items-center">
             <img 
               className="h-3 w-20 sm:h-4 sm:w-24" 

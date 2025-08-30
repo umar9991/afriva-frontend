@@ -21,7 +21,6 @@ export default function SetUpProfile() {
    <CustomTextField  placeholder="Select Country"/>
    <CustomLabel text="Country ID"/>    
    <CustomTextField placeholder="Enter Country ID"/>
-   {/* <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins']">Forgot Password?</div> */}
    <CustomButton label='Verify' to='/setup-avatar'/>
    <AuthRedirectText question="I already have an account!"
   linkText="Log in"

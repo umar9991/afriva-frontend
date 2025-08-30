@@ -87,7 +87,6 @@ export default function SignUp() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             
-            {/* REMOVED 'to' prop, only using onClick */}
             <CustomButton 
               label={isLoading ? 'Creating Account...' : 'Continue'}
               onClick={handleSignup}

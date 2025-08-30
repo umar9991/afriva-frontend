@@ -1,7 +1,8 @@
 import axios from "axios";
+import API_CONFIG from '../config/api';
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api/auth", 
+  baseURL: `${API_CONFIG.getBaseURL()}/api/auth`, 
   withCredentials: true, 
 });
 
@@ -11,4 +12,10 @@ export const signin = (userData) => API.post("/signin", userData);
 
 export const signout = () => API.post("/signout");
 
+
 export const sendVerificationCode = (email) => API.patch("/sendVerificationCode", { email });
+export const verifyOtp = (email, otp) =>
+  API.post("/verify-otp", {
+    email,
+    otp,
+  });

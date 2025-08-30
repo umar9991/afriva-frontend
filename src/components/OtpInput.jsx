@@ -6,7 +6,6 @@ export default function OtpInput({ value, onChange }) {
   const otpLength = 4;
 
   const handleInputChange = (index, inputValue) => {
-    // Only allow numbers
     if (!/^\d*$/.test(inputValue)) return;
 
     const newOtp = [...otp];
@@ -26,13 +25,10 @@ export default function OtpInput({ value, onChange }) {
   };
 
   const handleKeyDown = (index, e) => {
-    // Handle backspace
     if (e.key === 'Backspace') {
       if (!otp[index] && index > 0) {
-        // If current input is empty, focus previous input
         inputRefs.current[index - 1]?.focus();
       } else {
-        // Clear current input
         const newOtp = [...otp];
         newOtp[index] = '';
         setOtp(newOtp);
@@ -44,7 +40,6 @@ export default function OtpInput({ value, onChange }) {
       }
     }
     
-    // Handle arrow keys
     if (e.key === 'ArrowLeft' && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
@@ -66,7 +61,6 @@ export default function OtpInput({ value, onChange }) {
       onChange(pastedData);
     }
 
-    // Focus the next empty input or the last input
     const nextIndex = Math.min(pastedData.length, otpLength - 1);
     inputRefs.current[nextIndex]?.focus();
   };

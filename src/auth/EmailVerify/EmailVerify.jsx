@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { verifyOtp, sendVerificationCode } from '../../../backend/services/authService'
+import { verifyOtp, sendVerificationCode } from '../../services/authService'
 import CustomHeading from '../../components/CustomHeading'
 import SubHeading from '../../components/SubHeading'
 import AuthRedirectText from '../../components/AuthRedirectText'
@@ -41,7 +41,7 @@ export default function EmailVerify() {
       return
     }
 
-    console.log('Verifying OTP:', { email, otp }) // Debug log
+    console.log('Verifying OTP:', { email, otp }) 
 
     setIsLoading(true)
     try {
@@ -49,14 +49,11 @@ export default function EmailVerify() {
       console.log('Verification response:', res.data) 
       alert(res.data.message)
       
-      // Clear verification email from storage
       localStorage.removeItem('verificationEmail')
       
-      // Store verification status
       localStorage.setItem('emailVerified', 'true')
       localStorage.setItem('userEmail', email)
       
-      // Navigate to setup profile
       navigate('/setup-profile')
     } catch (error) {
       console.error('OTP verification failed:', error)
