@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 import CustomHeading from '../../components/CustomHeading'
 import CasualImage from '../../assets/Casual.png'
 import Formal from '../../assets/Formal.png'
@@ -22,43 +21,33 @@ export default function DressStyle() {
   <div className="px-4 lg:px-16 pt-8 lg:pt-[60px] pb-[30px]">
     <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-5 mb-4 lg:mb-5">
       {[CasualImage, Formal].map((img, idx) => (
-        <motion.div
+        <div
           key={idx}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: idx * 0.1, duration: 0.5 }}
-          className={idx === 0 ? "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"}
+          className={`${idx === 0 ? "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"} opacity-0 animate-fadeInUp`}
+          style={{ animationDelay: `${idx * 100}ms` }}
         >
-          <motion.img
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-            className="w-full h-full"
+          <img
+            className="w-full h-full hover:scale-105 transition-transform duration-300"
             src={img}
             alt={idx === 0 ? 'Casual Dress Style' : 'Formal Dress Style'}
           />
-        </motion.div>
+        </div>
       ))}
     </div>
 
     <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-5">
       {[PartyImg, GymImg].map((img, idx) => (
-        <motion.div
+        <div
           key={idx}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: idx * 0.1, duration: 0.5 }}
-          className={idx === 0 ? "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"}
+          className={`${idx === 0 ? "w-[310px] lg:w-[689px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden" : "w-[310px] lg:w-[407px] h-[190px] lg:h-[289px] rounded-xl overflow-hidden"} opacity-0 animate-fadeInUp`}
+          style={{ animationDelay: `${(idx + 2) * 100}ms` }}
         >
-          <motion.img
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-            className="w-full h-full"
+          <img
+            className="w-full h-full hover:scale-105 transition-transform duration-300"
             src={img}
             alt={idx === 0 ? 'Party Dress Style' : 'Gym Dress Style'}
           />
-        </motion.div>
+        </div>
       ))}
     </div>
   </div>
@@ -79,15 +68,13 @@ export default function DressStyle() {
   
   xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-[16px] xl:px-[100px] ">
     {[0,1,2,3].map((i) => (
-      <motion.div
+      <div
         key={i}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ delay: i * 0.1, duration: 0.45 }}
+        className="opacity-0 animate-fadeInUp"
+        style={{ animationDelay: `${i * 100}ms` }}
       >
         <TestimonialCard />
-      </motion.div>
+      </div>
     ))}
   </div>
   {/* <section className="w-full bg-[#efefef] mt-[80.42px]">

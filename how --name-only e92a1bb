@@ -1,0 +1,10 @@
+[33m23a6c9b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix frontend
+[33me92a1bb[m Fix frontend functionalities
+[33m788bee3[m Fix deployment issues: resolve path-to-regexp error and improve Vercel config
+[33m4d5d1ec[m Fix deployment issues: resolve path-to-regexp error and improve Vercel config
+[33m3e95380[m first commit
+[33m462e72d[m Fix backend for Railway deployment - update environment variables and add Railway config
+[33mea74a85[m Integrate apis
+[33m824bcba[m Updated code
+[33m5446dfa[m Updated screens
+[33m2903b77[m Updated screens
