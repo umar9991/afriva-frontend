@@ -12,20 +12,69 @@ import CustomButton from '../../components/CustomButton'
 import React, { useState } from "react";
 import { signin } from '../../services/authService'
 import { useNavigate } from "react-router-dom";
-
+import { useToast } from '../../utils/ToastContainer';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { showSuccessToast, showErrorToast } = useToast();
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 3) {
+      newErrors.password = 'Password must be at least 3 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleLogin = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const res = await signin({ email, password });
       console.log("Login success:", res.data);
-      navigate("/main-home");
+      
+      if (res.data.success) {
+        showSuccessToast("Login successful! Redirecting...");
+        // Store user data if needed
+        localStorage.setItem('userToken', res.data.token);
+        localStorage.setItem('userEmail', email);
+        
+        setTimeout(() => {
+          navigate("/main-home");
+        }, 1000);
+      } else {
+        showErrorToast(res.data.message || "Login failed");
+      }
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
+      const errorMessage = error.response?.data?.message || "Login failed. Please try again.";
+      showErrorToast(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
     }
   };
   
@@ -47,25 +96,42 @@ export default function LoginScreen() {
             <CustomTextField 
               placeholder="Enter your email" 
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+              }}
+              onKeyPress={handleKeyPress}
+              className={errors.email ? 'border-red-500' : ''}
             />
+            {errors.email && (
+              <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+            )}
             
             <CustomLabel text="Password" />
             <PasswordField  
               placeholder="Enter password"  
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
+              }}
+              onKeyPress={handleKeyPress}
+              className={errors.password ? 'border-red-500' : ''}
             />
+            {errors.password && (
+              <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+            )}
             
             <Link to="/forgotMain">
-              <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer">
+              <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer hover:text-[#8BC53F] transition-colors">
                 Forgot Password?
               </div>
             </Link>
             
             <CustomButton 
-              label='Log In'
+              label={isLoading ? 'Logging In...' : 'Log In'}
               onClick={handleLogin}
+              disabled={isLoading}
             />
             
             <AuthRedirectText 
@@ -86,25 +152,42 @@ export default function LoginScreen() {
         <CustomTextField 
           placeholder="Enter your email" 
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+          }}
+          onKeyPress={handleKeyPress}
+          className={errors.email ? 'border-red-500' : ''}
         />
+        {errors.email && (
+          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+        )}
         
         <CustomLabel text="Password" />
         <PasswordField  
           placeholder="Enter password"  
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
+          }}
+          onKeyPress={handleKeyPress}
+          className={errors.password ? 'border-red-500' : ''}
         />
+        {errors.password && (
+          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+        )}
         
         <Link to="/forgotMain">
-          <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer">
+          <div className="self-stretch text-right justify-center text-[#555555] text-[12.93px] font-medium font-['Poppins'] cursor-pointer hover:text-[#8BC53F] transition-colors">
             Forgot Password?
           </div>
         </Link>
         
         <CustomButton 
-          label='Log In'
+          label={isLoading ? 'Logging In...' : 'Log In'}
           onClick={handleLogin}
+          disabled={isLoading}
         />
         
         <AuthRedirectText 

@@ -12,37 +12,85 @@ import React, { useState } from "react";
 import { signup } from '../../services/authService'
 import { sendVerificationCode } from '../../services/authService'
 import { useNavigate } from "react-router-dom";
+import { useToast } from '../../utils/ToastContainer';
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { showSuccessToast, showErrorToast } = useToast();
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    }
+    
+    if (!confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password';
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSignup = async () => {
-    if (password !== confirmPassword) {
-      return;
-    }
-
-    if (!email || !password) {
+    if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
     try {
-      const res = await signup({ email, password });
+      const res = await signup({ email, password, confirmPassword });
       console.log("Signup success:", res.data);
 
-      const verifyRes = await sendVerificationCode(email);
-      console.log("Verification code sent:", verifyRes.data);
-
-      localStorage.setItem('verificationEmail', email);
-      navigate("/email-verify");
+      if (res.data.success) {
+        showSuccessToast("Account created successfully! Sending verification code...");
+        
+        try {
+          const verifyRes = await sendVerificationCode(email);
+          console.log("Verification code sent:", verifyRes.data);
+          
+          if (verifyRes.data.success) {
+            showSuccessToast("Verification code sent to your email!");
+            localStorage.setItem('verificationEmail', email);
+            navigate("/email-verify");
+          } else {
+            showErrorToast(verifyRes.data.message || "Failed to send verification code");
+          }
+        } catch (verifyError) {
+          console.error("Verification code error:", verifyError);
+          showErrorToast("Account created but failed to send verification code. Please try again.");
+        }
+      } else {
+        showErrorToast(res.data.message || "Signup failed");
+      }
     } catch (error) {
-      console.error("Signup/Verification error:", error.response?.data || error.message);
+      console.error("Signup error:", error.response?.data || error.message);
+      const errorMessage = error.response?.data?.message || "Signup failed. Please try again.";
+      showErrorToast(errorMessage);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSignup();
     }
   };
 
@@ -64,22 +112,46 @@ export default function SignUp() {
             <CustomTextField 
               placeholder="Enter your email" 
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+              }}
+              onKeyPress={handleKeyPress}
+              className={errors.email ? 'border-red-500' : ''}
             />
+            {errors.email && (
+              <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+            )}
             
             <CustomLabel text="Password" />
             <PasswordField  
               placeholder="Enter password"  
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
+              }}
+              onKeyPress={handleKeyPress}
+              className={errors.password ? 'border-red-500' : ''}
             />
+            {errors.password && (
+              <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+            )}
             
             <CustomLabel text="Confirm Password" />    
             <PasswordField 
-              placeholder="Enter password" 
+              placeholder="Confirm password" 
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (errors.confirmPassword) setErrors(prev => ({ ...prev, confirmPassword: '' }));
+              }}
+              onKeyPress={handleKeyPress}
+              className={errors.confirmPassword ? 'border-red-500' : ''}
             />
+            {errors.confirmPassword && (
+              <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+            )}
             
             <CustomButton 
               label={isLoading ? 'Creating Account...' : 'Continue'}
@@ -105,22 +177,46 @@ export default function SignUp() {
         <CustomTextField 
           placeholder="Enter your email" 
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+          }}
+          onKeyPress={handleKeyPress}
+          className={errors.email ? 'border-red-500' : ''}
         />
+        {errors.email && (
+          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+        )}
         
         <CustomLabel text="Password" />
         <PasswordField  
           placeholder="Enter password"  
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
+          }}
+          onKeyPress={handleKeyPress}
+          className={errors.password ? 'border-red-500' : ''}
         />
+        {errors.password && (
+          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+        )}
         
         <CustomLabel text="Confirm Password" />    
         <PasswordField 
-          placeholder="Enter password" 
+          placeholder="Confirm password" 
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+            if (errors.confirmPassword) setErrors(prev => ({ ...prev, confirmPassword: '' }));
+          }}
+          onKeyPress={handleKeyPress}
+          className={errors.confirmPassword ? 'border-red-500' : ''}
         />
+        {errors.confirmPassword && (
+          <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+        )}
         
         <CustomButton 
           label={isLoading ? 'Creating Account...' : 'Continue'}

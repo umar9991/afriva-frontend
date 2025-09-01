@@ -1,13 +1,10 @@
 import React from "react";
 import { Star } from "lucide-react";
-import { motion } from "framer-motion";
 
 const TestimonialCard = () => {
   return (
-    <motion.div
-      whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(0,0,0,0.08)" }}
-      transition={{ type: "spring", stiffness: 250, damping: 20 }}
-      className="w-full max-w-[360px] sm:max-w-[400px] md:max-w-[420px] lg:max-w-[460px] px-5 sm:px-6 md:px-7 lg:px-8 py-5 sm:py-6 md:py-7 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-black/10 inline-flex justify-start items-start flex-wrap content-start overflow-hidden "
+    <div
+      className="w-full max-w-[360px] sm:max-w-[400px] md:max-w-[420px] lg:max-w-[460px] px-5 sm:px-6 md:px-7 lg:px-8 py-5 sm:py-6 md:py-7 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-black/10 inline-flex justify-start items-start flex-wrap content-start overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out"
     >
       <div className="flex-1 flex justify-between items-start">
         <div className="flex-1 inline-flex flex-col justify-start items-start gap-[15px]">
@@ -26,12 +23,12 @@ const TestimonialCard = () => {
             </div>
             <div className="self-stretch text-black/60 text-sm sm:text-base font-normal font-['Inter'] leading-snug">
               "Finding clothes that align with my personal style used to be a challenge until I discovered Shop.co.
-              The range of options they offer is truly remarkable, catering to a variety of tastes and occasions.”
+              The range of options they offer is truly remarkable, catering to a variety of tastes and occasions."
             </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
