@@ -70,15 +70,16 @@ export default function Navbar() {
         </div>
       
         <div className="hidden lg:flex lg:flex-row lg:items-center lg:gap-6">
-          <div className="text-black text-base font-medium font-['Inter'] cursor-pointer hover:text-[#8BC53F] transition-colors hover:-translate-y-0.5">
-            New Arrivals
-          </div>
-          <div className="text-black text-base font-medium font-['Inter'] cursor-pointer hover:text-[#8BC53F] transition-colors hover:-translate-y-0.5">
-            Brands
-          </div>
-          <div className="text-black text-base font-medium font-['Inter'] cursor-pointer hover:text-[#8BC53F] transition-colors hover:-translate-y-0.5">
-            Categories
-          </div>
+          <Link to="/newArrival">
+            <div className="text-black text-base font-medium font-['Inter'] cursor-pointer hover:text-[#8BC53F] transition-colors hover:-translate-y-0.5">
+              New Arrivals
+            </div>
+          </Link>
+          <Link to="/dress-style">
+            <div className="text-black text-base font-medium font-['Inter'] cursor-pointer hover:text-[#8BC53F] transition-colors hover:-translate-y-0.5">
+              Brands
+            </div>
+          </Link>
         </div>
 
         <form 
@@ -198,12 +199,12 @@ export default function Navbar() {
               New Arrivals
             </div>
           </Link>
-          <div className="px-4 py-3 text-black text-base font-normal font-['Inter'] cursor-pointer rounded hover:bg-gray-100 transition-colors">
-            Brands
-          </div>
-          <div className="px-4 py-3 text-black text-base font-normal font-['Inter'] cursor-pointer rounded hover:bg-gray-100 transition-colors">
-            Categories
-          </div>
+          <Link to="/dress-style">
+            <div className="px-4 py-3 text-black text-base font-normal font-['Inter'] cursor-pointer rounded hover:bg-gray-100 transition-colors">
+              Brands
+            </div>
+          </Link>
+         
         </div>
       )}
     </>

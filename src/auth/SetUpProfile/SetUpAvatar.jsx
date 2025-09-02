@@ -102,7 +102,6 @@ export default function SetUpAvatar() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1500))
       
-      // Here you would normally send the data to your backend
       console.log('Form submitted with data:', {
         username: formData.username,
         phoneNumber: formData.phoneNumber,
@@ -127,37 +126,43 @@ export default function SetUpAvatar() {
   const isFormValid = formData.username.trim() && formData.phoneNumber.trim() && Object.keys(errors).length === 0
 
   return (
-    <section className="h-screen flex items-center justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
-      <div className="">
-        <Logo className=""/>
+    <section className="min-h-screen h-screen flex flex-col items-center justify-center relative px-4 sm:px-6 md:flex-row md:items-center md:justify-between md:pl-[63px] lg:pl-[63px] md:px-0">
+  
+  <div className="md:hidden w-full h-full relative">
+    <div className="absolute inset-0">
+      <SideImage src={SignUpImg} className="w-full h-full object-cover" />
+    </div>
+    
+    <div className="absolute inset-0 flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-auto">
+        <Logo className="mb-4"/>
         <CustomHeading text="Setup your profile" />
         <SubHeading text="Fill in the details to complete your profile."/>
         
+        {/* Avatar Section - Mobile */}
         <div className="flex justify-center items-center">
-          <div className="w-[140.47px] h-[140.47px] relative flex justify-center mb-[20px]">
+          <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] relative flex justify-center mb-[16px]">
             <img
               src={avatarPreview}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
             />
             
-          
             <input
               type="file"
-              id="avatar-upload"
+              id="avatar-upload-mobile"
               accept="image/*"
               onChange={handleAvatarChange}
               className="hidden"
             />
             
-            
             <label
-              htmlFor="avatar-upload"
-              className="w-[34.11px] h-[34.11px] absolute left-[101.54px] top-[99.95px] bg-[#12B76A] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#0ea55a] transition-colors"
+              htmlFor="avatar-upload-mobile"
+              className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] absolute right-0 bottom-0 bg-[#12B76A] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#0ea55a] transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-[14px] h-[14px] text-white"
+                className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -173,10 +178,9 @@ export default function SetUpAvatar() {
           </div>
         </div>
         
-        {/* Avatar error message */}
         {errors.avatar && (
-          <div className="flex justify-center mb-4">
-            <p className="text-red-500 text-sm">{errors.avatar}</p>
+          <div className="flex justify-center mb-3">
+            <p className="text-red-500 text-xs">{errors.avatar}</p>
           </div>
         )}
 
@@ -185,11 +189,10 @@ export default function SetUpAvatar() {
           placeholder="Enter brand name"
           value={formData.username}
           onChange={(e) => handleInputChange('username', e.target.value)}
+          className="mb-3"
         />
         {errors.username && (
-          <div className="mb-4 -mt-2">
-            <p className="text-red-500 text-sm">{errors.username}</p>
-          </div>
+          <div className="text-red-500 text-xs">{errors.username}</div>
         )}
 
         <CustomLabel text="Phone number"/>
@@ -197,17 +200,14 @@ export default function SetUpAvatar() {
           placeholder="Enter number"
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+          className="mb-3"
         />
         {errors.phoneNumber && (
-          <div className="mb-4 -mt-2">
-            <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
-          </div>
+          <div className="text-red-500 text-xs">{errors.phoneNumber}</div>
         )}
 
         {errors.submit && (
-          <div className="mb-4">
-            <p className="text-red-500 text-sm text-center">{errors.submit}</p>
-          </div>
+          <div className="text-red-500 text-xs text-center mb-3">{errors.submit}</div>
         )}
 
         <div onClick={handleSubmit}>
@@ -218,10 +218,95 @@ export default function SetUpAvatar() {
           />
         </div>
       </div>
-      
-      <div>
-        <SideImage src={SignUpImg}/>
+    </div>
+  </div>
+
+  <div className="hidden md:block">
+    <Logo className=""/>
+    <CustomHeading text="Setup your profile" />
+    <SubHeading text="Fill in the details to complete your profile."/>
+    
+    <div className="flex justify-center items-center">
+      <div className="w-[140.47px] h-[140.47px] relative flex justify-center mb-[20px]">
+        <img
+          src={avatarPreview}
+          alt="avatar"
+          className="w-full h-full rounded-full object-cover"
+        />
+        
+        <input
+          type="file"
+          id="avatar-upload"
+          accept="image/*"
+          onChange={handleAvatarChange}
+          className="hidden"
+        />
+        
+        <label
+          htmlFor="avatar-upload"
+          className="w-[34.11px] h-[34.11px] absolute left-[101.54px] top-[99.95px] bg-[#12B76A] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#0ea55a] transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-[14px] h-[14px] text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.232 5.232l3.536 3.536M9 11l6-6m2 2l-6 6m0 0L6 18H3v-3l6-6z"
+            />
+          </svg>
+        </label>
       </div>
-    </section>
+    </div>
+    
+    {errors.avatar && (
+      <div className="flex justify-center mb-4">
+        <p className="text-red-500 text-sm">{errors.avatar}</p>
+      </div>
+    )}
+
+    <CustomLabel text="User name"/>
+    <CustomTextField className="mb-[20px]" 
+      placeholder="Enter brand name"
+      value={formData.username}
+      onChange={(e) => handleInputChange('username', e.target.value)}
+    />
+    {errors.username && (
+      <div className="text-red-500 text-sm">{errors.username}</div>
+    )}
+
+    <CustomLabel text="Phone number"/>
+    <CustomTextField  
+      placeholder="Enter number"
+      value={formData.phoneNumber}
+      onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+    />
+    {errors.phoneNumber && (
+      <div className="text-red-500 text-sm">{errors.phoneNumber}</div>
+    )}
+
+    {errors.submit && (
+      <div className="text-red-500 text-sm text-center mb-4">{errors.submit}</div>
+    )}
+
+    <div onClick={handleSubmit}>
+      <CustomButton 
+        label={isSubmitting ? 'Completing...' : 'Complete'} 
+        to={isFormValid && !isSubmitting ? '/main-home' : null}
+        disabled={!isFormValid || isSubmitting}
+      />
+    </div>
+  </div>
+  
+  <div className="hidden md:block">
+    <SideImage src={SignUpImg}/>
+  </div>
+  
+</section>
   )
 }

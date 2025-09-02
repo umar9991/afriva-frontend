@@ -159,10 +159,10 @@ export default function SignUp() {
                 if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
               }}
               onKeyPress={handleKeyPress}
-              className={errors.email ? 'border-red-500' : ''}
+              className={`mb-3 ${errors.email ? 'border-red-500' : ''}`}
             />
             {errors.email && (
-              <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+              <div className="text-red-500 text-sm mt-0 mb-0">{errors.email}</div>
             )}
             
             <CustomLabel text="Password" />
@@ -174,10 +174,10 @@ export default function SignUp() {
                 if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
               }}
               onKeyPress={handleKeyPress}
-              className={errors.password ? 'border-red-500' : ''}
+              className={`mb-3 ${errors.password ? 'border-red-500' : ''}`}
             />
             {errors.password && (
-              <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+              <div className="text-red-500 text-sm mt-0 mb-1">{errors.password}</div>
             )}
             
             <CustomLabel text="Confirm Password" />    
@@ -189,10 +189,10 @@ export default function SignUp() {
                 if (errors.confirmPassword) setErrors(prev => ({ ...prev, confirmPassword: '' }));
               }}
               onKeyPress={handleKeyPress}
-              className={errors.confirmPassword ? 'border-red-500' : ''}
+              className={`mb-3 ${errors.confirmPassword ? 'border-red-500' : ''}`}
             />
             {errors.confirmPassword && (
-              <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+              <div className="text-red-500 text-sm mt-0 mb-1">{errors.confirmPassword}</div>
             )}
             
             <CustomButton 
@@ -224,10 +224,10 @@ export default function SignUp() {
             if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
           }}
           onKeyPress={handleKeyPress}
-          className={errors.email ? 'border-red-500' : ''}
+          className={`mb-3 ${errors.email ? 'border-red-500' : ''}`}
         />
         {errors.email && (
-          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+          <div className="text-red-500 text-sm mt-0 mb-1">{errors.email}</div>
         )}
         
         <CustomLabel text="Password" />
@@ -239,10 +239,10 @@ export default function SignUp() {
             if (errors.password) setErrors(prev => ({ ...prev, password: '' }));
           }}
           onKeyPress={handleKeyPress}
-          className={errors.password ? 'border-red-500' : ''}
+          className={`mb-3 ${errors.password ? 'border-red-500' : ''}`}
         />
         {errors.password && (
-          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+          <div className="text-red-500 text-sm mt-0 mb-1">{errors.password}</div>
         )}
         
         <CustomLabel text="Confirm Password" />    
@@ -254,10 +254,10 @@ export default function SignUp() {
             if (errors.confirmPassword) setErrors(prev => ({ ...prev, confirmPassword: '' }));
           }}
           onKeyPress={handleKeyPress}
-          className={errors.confirmPassword ? 'border-red-500' : ''}
+          className={`mb-3 ${errors.confirmPassword ? 'border-red-500' : ''}`}
         />
         {errors.confirmPassword && (
-          <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+          <div className="text-red-500 text-sm mt-0 mb-1">{errors.confirmPassword}</div>
         )}
         
         <CustomButton 

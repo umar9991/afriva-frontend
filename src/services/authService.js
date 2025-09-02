@@ -1,27 +1,23 @@
 import axios from "axios";
 import API_CONFIG from '../config/api';
 
-// Helper function to clean URLs
 const cleanURL = (url) => {
   if (!url) return '';
   return url.replace(/\/+$/, '').trim();
 };
 
-// Create axios instance with better error handling
 const API = axios.create({
   baseURL: `${cleanURL(API_CONFIG.getBaseURL())}/api/auth`, 
   withCredentials: true,
-  timeout: 30000, // Increased to 30 seconds for production
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   }
 });
 
-// Add request interceptor for logging
 API.interceptors.request.use(
   (config) => {
-    // Ensure no double slashes in URL
     const cleanBaseURL = cleanURL(config.baseURL);
     const cleanURLPath = config.url?.replace(/^\/+/, '');
     const fullURL = `${cleanBaseURL}/${cleanURLPath}`;
@@ -36,7 +32,6 @@ API.interceptors.request.use(
       data: config.data
     });
     
-    // Update the config to use clean URLs
     config.baseURL = cleanBaseURL;
     config.url = cleanURLPath;
     

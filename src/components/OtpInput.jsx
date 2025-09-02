@@ -66,13 +66,13 @@ export default function OtpInput({ value, onChange }) {
   };
 
   return (
-    <div className="inline-flex flex-col items-center gap-5">
-      <div className="flex gap-4 md:gap-[43px] overflow-hidden">
+    <div className="inline-flex flex-col items-center gap-4 sm:gap-5">
+      <div className="flex gap-3 sm:gap-4 md:gap-[43px] overflow-hidden">
         {Array.from({ length: otpLength }).map((_, index) => (
           <div
             key={index}
-            className="mb-[32px] max-w-20 max-h-20 p-2 bg-white rounded-[99px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)] 
-                       outline outline-1 outline-offset-[-1px] outline-[#cfd4dc] 
+            className="mb-[20px] sm:mb-[28px] md:mb-[32px] w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 p-1 sm:p-2 bg-white rounded-full shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)] 
+                       outline outline-1 outline-offset-[-1px] outline-[#cfd4dc]
                        flex justify-center items-center"
           >
             <input
@@ -83,7 +83,7 @@ export default function OtpInput({ value, onChange }) {
               onChange={(e) => handleInputChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}
               onPaste={handlePaste}
-              className="w-full text-center text-[#101828] text-5xl font-medium font-['Inter'] leading-[60px] bg-transparent outline-none"
+              className="w-full text-center text-[#101828] text-3xl sm:text-4xl md:text-5xl font-medium leading-[44px] sm:leading-[52px] md:leading-[60px] bg-transparent outline-none"
               autoComplete="off"
             />
           </div>

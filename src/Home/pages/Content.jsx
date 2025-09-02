@@ -11,7 +11,7 @@ export default function Content() {
     <>
     <section className="h-screen bg-cover w-full max-h-[703px] pl-[16px] pt-[30px]"
       style={{ backgroundImage: `url(${BgPic})`  } } >
-       <div className="w-full px-4 sm:px-6 lg:px-[100px] py-8 sm:py-12 lg:py-[39px]">
+       <div className="w-full px-4 sm:px-6 lg:px-[85px] py-8 sm:py-12 lg:py-[39px]">
   <div
     className="w-full max-w-[577px] flex flex-col gap-4 sm:gap-6 opacity-0 animate-fadeInUp"
     style={{ animationDelay: '0.1s' }}

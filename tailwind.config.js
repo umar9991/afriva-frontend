@@ -8,6 +8,9 @@ module.exports = {
         lightGray: '#f5f5f5',
         darkText: '#222222',
       },
+      fontFamily: {
+        sans: ["Inter", "Outfit", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif"],
+      }
     },
   },
   plugins: [],

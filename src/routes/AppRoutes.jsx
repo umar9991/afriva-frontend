@@ -17,6 +17,7 @@ import ForgotSideBar from "../auth/forgotPassword/ForgotSideBar/ForgotSideBar"
 import Navbar from "../Home/pages/Navbar"
 import MainHomeLayout from "../Home/MainHomeLayout"
 import NewArrivals from "../Home/pages/NewArrivals"
+import DressStyle from "../Home/pages/DressStyle"
 function AppRoutes() {
   return (
    <Routes>
@@ -43,6 +44,7 @@ function AppRoutes() {
 
     <Route path="/main-home" element={<MainHomeLayout />} />
      <Route path="/newArrival" element={<NewArrivals />} />
+     <Route path="/dress-style" element={<DressStyle />} />
 
 </Routes>
   )

@@ -39,7 +39,7 @@ export default function YourDetail() {
             <CustomLabel text="Email" />
             <CustomTextField 
               placeholder="Enter your email"
-             
+              className="mb-3"
             />
           </div>
 

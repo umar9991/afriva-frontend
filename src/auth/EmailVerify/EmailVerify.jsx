@@ -25,7 +25,6 @@ export default function EmailVerify() {
   useEffect(() => {
     console.log('🔍 EmailVerify component mounted');
     
-    // Check for email in localStorage
     const storedEmail = localStorage.getItem('verificationEmail');
     const userEmail = localStorage.getItem('userEmail');
     
@@ -140,7 +139,7 @@ export default function EmailVerify() {
       const res = await sendVerificationCode(email)
       if (res.data.success) {
         showSuccessToast('Verification code sent again!')
-        setResendCountdown(30) // 30 second cooldown
+        setResendCountdown(30) 
       } else {
         showErrorToast(res.data.message || 'Failed to resend code')
       }
@@ -159,50 +158,155 @@ export default function EmailVerify() {
   }
 
   return (
-    <section className="h-screen flex items-center justify-center sm:flex sm:items-center sm:justify-center md:items-center md:flex md:justify-between md:pl-[63px] lg:flex lg:justify-between lg:pl-[63px]">
-      <div className="">
-        <Logo className=""/>
-        <CustomHeading text="Check your mail box" />
-        <SubHeading text="Verify codes delivered to your inbox."/>
-        
-        <div className="max-w-[360px] mb-[32px] justify-start">
-          <span className="text-[#475467] text-base font-normal font-['Inter'] leading-normal">
-            We sent a verification code to 
-          </span>
-          <br />
-          <span className="text-[#475467] font-bold text-base font-['Inter']">
-            {email || 'your email'}
-          </span>
+    <section className="min-h-screen h-screen flex flex-col items-center justify-center relative px-4 sm:px-6 md:flex-row md:items-center md:justify-between md:pl-[63px] lg:pl-[63px] md:px-0">
+  
+    <div className="md:hidden w-full h-full relative">
+      <div className="absolute inset-0">
+        <SideImage src={LoginImg} className="w-full h-full object-cover" />
+      </div>
+      
+      <div className="absolute inset-0 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-auto">
+          <Logo className="mb-4" />
+          <CustomHeading text="Check your mail box" />
+          <SubHeading text="Verify codes delivered to your inbox." />
+          
+          <div className="mb-6">
+            <span className="text-[#475467] text-sm font-normal font-['Inter'] leading-normal">
+              We sent a verification code to
+            </span>
+            <br />
+            <span className="text-[#475467] font-bold text-sm font-['Inter'] break-all">
+              {email || 'your email'}
+            </span>
+          </div>
+          
+          <div className="mb-6 flex justify-center">
+            <OtpInput value={otp} onChange={setOtp} onKeyPress={handleKeyPress} />
+          </div>
+          
+          <CustomButton
+            label={isLoading ? 'Verifying...' : 'Continue'}
+            onClick={handleVerifyOtp}
+            disabled={isLoading || !otp || otp.length < 4}
+          />
+          
+          <div className="mt-4">
+            {resendCountdown > 0 ? (
+              <div className="text-center text-gray-500 text-sm">
+                Resend available in {resendCountdown} seconds
+              </div>
+            ) : (
+              <AuthRedirectText
+                question="Didn't receive the email?"
+                linkText={isResending ? "Sending..." : "Click to resend"}
+                onClick={handleResendCode}
+                disabled={isResending}
+              />
+            )}
+          </div>
+          
+          <div className="mt-4">
+            <BackButton to='/register'/>
+          </div>
         </div>
-        
+      </div>
+    </div>
+  
+    <div className="hidden md:block lg:hidden w-full md:w-auto md:max-w-md">
+      <Logo className="mb-4" />
+      <CustomHeading text="Check your mail box" />
+      <SubHeading text="Verify codes delivered to your inbox." />
+      
+      <div className="max-w-[360px] mb-[32px] justify-start">
+        <span className="text-[#475467] text-base font-normal font-['Inter'] leading-normal">
+          We sent a verification code to
+        </span>
+        <br />
+        <span className="text-[#475467] font-bold text-base font-['Inter'] break-words">
+          {email || 'your email'}
+        </span>
+      </div>
+      
+      <div className="mb-6 flex justify-center">
         <OtpInput value={otp} onChange={setOtp} onKeyPress={handleKeyPress} />
-        
-        <CustomButton 
-          label={isLoading ? 'Verifying...' : 'Continue'} 
-          onClick={handleVerifyOtp}
-          disabled={isLoading || !otp || otp.length < 4}
-        />
-        
-        <div className="mt-4">
-          {resendCountdown > 0 ? (
-            <div className="text-center text-gray-500 text-sm">
-              Resend available in {resendCountdown} seconds
-            </div>
-          ) : (
-            <AuthRedirectText 
-              question="Didn't receive the email?"
-              linkText={isResending ? "Sending..." : "Click to resend"}
-              onClick={handleResendCode}
-              disabled={isResending}
-            />
-          )}
-        </div>
-        
+      </div>
+      
+      <CustomButton
+        label={isLoading ? 'Verifying...' : 'Continue'}
+        onClick={handleVerifyOtp}
+        disabled={isLoading || !otp || otp.length < 4}
+      />
+      
+      <div className="mt-4">
+        {resendCountdown > 0 ? (
+          <div className="text-center text-gray-500 text-sm">
+            Resend available in {resendCountdown} seconds
+          </div>
+        ) : (
+          <AuthRedirectText
+            question="Didn't receive the email?"
+            linkText={isResending ? "Sending..." : "Click to resend"}
+            onClick={handleResendCode}
+            disabled={isResending}
+          />
+        )}
+      </div>
+      
+      <div className="mt-6">
         <BackButton to='/register'/>
       </div>
-      <div>
-        <SideImage src={LoginImg}/>
+    </div>
+  
+    <div className="hidden lg:block w-full md:w-auto md:max-w-md lg:max-w-lg xl:max-w-xl">
+      <Logo className="mb-4" />
+      <CustomHeading text="Check your mail box" />
+      <SubHeading text="Verify codes delivered to your inbox." />
+      
+      <div className="max-w-[360px] mb-[32px] justify-start">
+        <span className="text-[#475467] text-base font-normal font-['Inter'] leading-normal">
+          We sent a verification code to
+        </span>
+        <br />
+        <span className="text-[#475467] font-bold text-base font-['Inter'] break-words">
+          {email || 'your email'}
+        </span>
       </div>
-    </section>
+      
+      <div className="mb-6">
+        <OtpInput value={otp} onChange={setOtp} onKeyPress={handleKeyPress} />
+      </div>
+      
+      <CustomButton
+        label={isLoading ? 'Verifying...' : 'Continue'}
+        onClick={handleVerifyOtp}
+        disabled={isLoading || !otp || otp.length < 4}
+      />
+      
+      <div className="mt-4">
+        {resendCountdown > 0 ? (
+          <div className="text-center text-gray-500 text-sm">
+            Resend available in {resendCountdown} seconds
+          </div>
+        ) : (
+          <AuthRedirectText
+            question="Didn't receive the email?"
+            linkText={isResending ? "Sending..." : "Click to resend"}
+            onClick={handleResendCode}
+            disabled={isResending}
+          />
+        )}
+      </div>
+      
+      <div className="mt-6">
+        <BackButton to='/register'/>
+      </div>
+    </div>
+    
+    <div className="hidden md:block md:flex-shrink-0">
+      <SideImage src={LoginImg} />
+    </div>
+    
+  </section>
   )
 }

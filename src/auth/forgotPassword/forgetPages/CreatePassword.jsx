@@ -30,17 +30,17 @@ export default function CreatePassword() {
             </div>
           </div>
           
-          <div className="space-y-4 sm:space-y-6">
+          <div className="">
             <div>
               <CustomLabel text="Password"/>
               <div className="mt-2">
-                <PasswordField placeholder="Enter password"/>
+                <PasswordField placeholder="Enter password" className="mb-3"/>
               </div>
             </div>
             <div>
               <CustomLabel text="Confirm Password"/>
               <div className="mt-2">
-                <PasswordField placeholder="Enter password"/>
+                <PasswordField placeholder="Enter password" className="mb-3"/>
               </div>
             </div>
           </div>
