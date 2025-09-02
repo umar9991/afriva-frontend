@@ -1,27 +1,32 @@
-import CustomTextField from '../../components/CustomTextField'
-import CustomLabel from '../../components/CustomLabel'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { signup, sendVerificationCode } from '../../services/authService'
 import CustomHeading from '../../components/CustomHeading'
 import SubHeading from '../../components/SubHeading'
 import AuthRedirectText from '../../components/AuthRedirectText'
 import Logo from '../../components/Logo'
 import SideImage from '../../components/SideImage'
 import SignUpImg from "../.././assets/SignUp-Side.png"
+import CustomLabel from '../../components/CustomLabel'
+import CustomTextField from '../../components/CustomTextField'
 import PasswordField from '../../components/PasswordField'
 import CustomButton from '../../components/CustomButton'
-import React, { useState } from "react";
-import { signup } from '../../services/authService'
-import { sendVerificationCode } from '../../services/authService'
-import { useNavigate } from "react-router-dom";
-import { useToast } from '../../utils/ToastContainer';
+import { useToast } from '../../utils/ToastContainer'
+import { quickTest } from '../../utils/debug'
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-  const { showSuccessToast, showErrorToast } = useToast();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
+  const { showSuccessToast, showErrorToast } = useToast()
+
+  useEffect(() => {
+    // Run quick test when component mounts
+    quickTest()
+  }, [])
 
   const validateForm = () => {
     const newErrors = {};

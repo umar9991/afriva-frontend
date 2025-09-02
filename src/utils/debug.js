@@ -103,5 +103,39 @@ export const testOTPVerification = async (email) => {
   }
 };
 
+// Simple test function to check current state
+export const quickTest = () => {
+  console.log('🧪 Quick Test Results:');
+  console.log('📍 Current URL:', window.location.href);
+  console.log('📧 Stored email:', localStorage.getItem('verificationEmail'));
+  console.log('🔑 All localStorage keys:', Object.keys(localStorage));
+  console.log('🌐 Environment:', import.meta.env.MODE);
+  console.log('🔗 API Base URL:', import.meta.env.VITE_API_BASE_URL);
+  
+  // Test backend connection
+  const testBackend = async () => {
+    try {
+      const baseURL = import.meta.env.VITE_API_BASE_URL || 'https://afriva-backend.vercel.app';
+      const cleanURL = baseURL.replace(/\/+$/, '');
+      
+      console.log('🔍 Testing backend at:', cleanURL);
+      
+      const response = await fetch(`${cleanURL}/health`);
+      console.log('🏥 Health check status:', response.status);
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('🏥 Health data:', data);
+      } else {
+        console.error('❌ Health check failed');
+      }
+    } catch (error) {
+      console.error('❌ Backend test failed:', error);
+    }
+  };
+  
+  testBackend();
+};
+
 // Export for use in components
 export default debugAPI;
