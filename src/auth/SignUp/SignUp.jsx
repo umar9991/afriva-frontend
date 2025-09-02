@@ -50,23 +50,27 @@ export default function SignUp() {
 
   const handleSignup = async () => {
     if (!validateForm()) {
+      console.log('❌ Form validation failed');
       return;
     }
 
+    console.log('🚀 Starting signup process for email:', email);
+    console.log('🔍 Form data:', { email, password: '***', confirmPassword: '***' });
+    
     setIsLoading(true);
     try {
-      console.log('🚀 Starting signup process for email:', email);
-      
+      console.log('📡 Calling signup API...');
       const res = await signup({ email, password, confirmPassword });
-      console.log("✅ Signup success:", res.data);
+      console.log("✅ Signup API response:", res.data);
 
       if (res.data.success) {
         showSuccessToast("Account created successfully! Sending verification code...");
         console.log('📧 Account created, now sending verification code...');
         
         try {
+          console.log('📡 Calling sendVerificationCode API...');
           const verifyRes = await sendVerificationCode(email);
-          console.log("📧 Verification code sent:", verifyRes.data);
+          console.log("📧 Verification code API response:", verifyRes.data);
           
           if (verifyRes.data.success) {
             showSuccessToast("Verification code sent to your email!");
@@ -77,30 +81,48 @@ export default function SignUp() {
             const storedEmail = localStorage.getItem('verificationEmail');
             console.log('🔍 Verification email stored in localStorage:', storedEmail);
             console.log('🔍 localStorage keys:', Object.keys(localStorage));
+            console.log('🔍 All localStorage items:', Object.fromEntries(
+              Object.keys(localStorage).map(key => [key, localStorage.getItem(key)])
+            ));
             
             if (storedEmail === email) {
               console.log('✅ Email successfully stored in localStorage');
+              console.log('🧭 Navigating to email-verify page...');
               navigate("/email-verify");
             } else {
               console.error('❌ Failed to store email in localStorage');
               showErrorToast("Failed to store email. Please try again.");
             }
           } else {
+            console.error('❌ Verification code API failed:', verifyRes.data);
             showErrorToast(verifyRes.data.message || "Failed to send verification code");
           }
         } catch (verifyError) {
           console.error("❌ Verification code error:", verifyError);
+          console.error("❌ Verification error details:", {
+            message: verifyError.message,
+            response: verifyError.response?.data,
+            status: verifyError.response?.status
+          });
           showErrorToast("Account created but failed to send verification code. Please try again.");
         }
       } else {
+        console.error('❌ Signup API failed:', res.data);
         showErrorToast(res.data.message || "Signup failed");
       }
     } catch (error) {
-      console.error("❌ Signup error:", error.response?.data || error.message);
+      console.error("❌ Signup error:", error);
+      console.error("❌ Signup error details:", {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        stack: error.stack
+      });
       const errorMessage = error.response?.data?.message || "Signup failed. Please try again.";
       showErrorToast(errorMessage);
     } finally {
       setIsLoading(false);
+      console.log('🏁 Signup process completed');
     }
   };
 
