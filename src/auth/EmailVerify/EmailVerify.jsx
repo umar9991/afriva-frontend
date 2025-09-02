@@ -11,6 +11,7 @@ import CustomButton from '../../components/CustomButton'
 import OtpInput from '../../components/OtpInput'
 import BackButton from '../../components/BackButton'
 import { useToast } from '../../utils/ToastContainer'
+import { testOTPVerification } from '../../utils/debug'
 
 export default function EmailVerify() {
   const [otp, setOtp] = useState('')
@@ -29,7 +30,9 @@ export default function EmailVerify() {
       return
     }
     setEmail(storedEmail)
-    console.log('Email found in localStorage:', storedEmail) 
+    console.log('Email found in localStorage:', storedEmail)
+    
+    testOTPVerification(storedEmail)
   }, [navigate, showErrorToast])
 
   useEffect(() => {
@@ -51,12 +54,12 @@ export default function EmailVerify() {
       return
     }
 
-    console.log('Verifying OTP:', { email, otp }) 
+    console.log('🔍 Verifying OTP:', { email, otp }) 
 
     setIsLoading(true)
     try {
       const res = await verifyOtp(email, otp)
-      console.log('Verification response:', res.data) 
+      console.log('✅ Verification response:', res.data) 
       
       if (res.data.success) {
         showSuccessToast('Email verified successfully!')
@@ -72,10 +75,20 @@ export default function EmailVerify() {
         showErrorToast(res.data.message || 'Verification failed')
       }
     } catch (error) {
-      console.error('OTP verification failed:', error)
-      console.error('Error details:', error.response?.data) 
+      console.error('❌ OTP verification failed:', error)
+      console.error('❌ Error response:', error.response)
+      console.error('❌ Error status:', error.response?.status)
+      console.error('❌ Error data:', error.response?.data)
+      console.error('❌ Error message:', error.response?.data?.message)
+      
       const errorMessage = error.response?.data?.message || 'Invalid OTP. Please try again.'
       showErrorToast(errorMessage)
+      
+      if (error.response?.data?.message === 'User not found! Please check your email address.') {
+        console.log('🔍 This suggests the backend is running the OLD code without case-insensitive search')
+        console.log('🔍 Email being searched:', email)
+        console.log('🔍 Try deploying the backend changes again')
+      }
     } finally {
       setIsLoading(false)
     }

@@ -1,23 +1,45 @@
 import axios from "axios";
 import API_CONFIG from '../config/api';
 
+// Helper function to clean URLs
+const cleanURL = (url) => {
+  if (!url) return '';
+  return url.replace(/\/+$/, '').trim();
+};
+
 // Create axios instance with better error handling
 const API = axios.create({
-  baseURL: `${API_CONFIG.getBaseURL()}/api/auth`, 
+  baseURL: `${cleanURL(API_CONFIG.getBaseURL())}/api/auth`, 
   withCredentials: true,
-  timeout: 10000, // 10 second timeout
+  timeout: 30000, // Increased to 30 seconds for production
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
 });
 
 // Add request interceptor for logging
 API.interceptors.request.use(
   (config) => {
+    // Ensure no double slashes in URL
+    const cleanBaseURL = cleanURL(config.baseURL);
+    const cleanURLPath = config.url?.replace(/^\/+/, '');
+    const fullURL = `${cleanBaseURL}/${cleanURLPath}`;
+    
     console.log('🚀 API Request:', {
       method: config.method?.toUpperCase(),
       url: config.url,
       baseURL: config.baseURL,
-      fullURL: `${config.baseURL}${config.url}`,
+      cleanBaseURL,
+      cleanURLPath,
+      fullURL: fullURL,
       data: config.data
     });
+    
+    // Update the config to use clean URLs
+    config.baseURL = cleanBaseURL;
+    config.url = cleanURLPath;
+    
     return config;
   },
   (error) => {
@@ -26,7 +48,6 @@ API.interceptors.request.use(
   }
 );
 
-// Add response interceptor for logging
 API.interceptors.response.use(
   (response) => {
     console.log('✅ API Response:', {
@@ -41,7 +62,8 @@ API.interceptors.response.use(
       status: error.response?.status,
       message: error.response?.data?.message || error.message,
       url: error.config?.url,
-      baseURL: error.config?.baseURL
+      baseURL: error.config?.baseURL,
+      timeout: error.code === 'ECONNABORTED' ? 'Request timed out' : 'No timeout'
     });
     return Promise.reject(error);
   }
@@ -61,17 +83,24 @@ export const verifyOtp = (email, otp) =>
     otp,
   });
 
-// Test function to check if backend is accessible
 export const testBackendConnection = async () => {
   try {
     const baseURL = API_CONFIG.getBaseURL();
     console.log('🔍 Testing backend connection to:', baseURL);
     
-    const response = await axios.get(`${baseURL}/`, { timeout: 5000 });
+    const response = await axios.get(`${baseURL}/`, { 
+      timeout: 15000,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     console.log('✅ Backend is accessible:', response.data);
     return true;
   } catch (error) {
     console.error('❌ Backend connection failed:', error.message);
+    if (error.code === 'ECONNABORTED') {
+      console.error('Request timed out - backend might be slow to respond');
+    }
     return false;
   }
 };

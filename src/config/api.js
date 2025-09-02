@@ -3,21 +3,23 @@ export const API_CONFIG = {
   LOCAL_URL: 'http://localhost:8000',
   
   getBaseURL: () => {
-    // Check if we're in production (Vercel)
     if (window.location.hostname.includes('vercel.app')) {
-      console.log('Using production API:', API_CONFIG.PRODUCTION_URL);
-      return API_CONFIG.PRODUCTION_URL;
+      const url = API_CONFIG.PRODUCTION_URL.replace(/\/+$/, ''); 
+      console.log('Using production API:', url);
+      return url;
     }
     
-    // Check for environment variable
     if (import.meta.env.VITE_API_BASE_URL) {
-      console.log('Using env API:', import.meta.env.VITE_API_BASE_URL);
-      return import.meta.env.VITE_API_BASE_URL;
+      // Remove ALL trailing slashes and clean the URL
+      const envUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '').trim(); 
+      console.log('Using env API:', envUrl);
+      console.log('Original env API:', import.meta.env.VITE_API_BASE_URL);
+      return envUrl;
     }
     
-    // Default to local
-    console.log('Using local API:', API_CONFIG.LOCAL_URL);
-    return API_CONFIG.LOCAL_URL;
+    const url = API_CONFIG.LOCAL_URL.replace(/\/+$/, ''); 
+    console.log('Using local API:', url);
+    return url;
   }
 };
 
