@@ -23,15 +23,33 @@ export default function EmailVerify() {
   const { showSuccessToast, showErrorToast, showInfoToast } = useToast()
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem('verificationEmail')
     console.log('🔍 EmailVerify component mounted');
-    console.log('🔍 Stored email from localStorage:', storedEmail);
+    
+    // Check if user is already verified
+    const isVerified = localStorage.getItem('emailVerified') === 'true';
+    const userEmail = localStorage.getItem('userEmail');
+    const verificationEmail = localStorage.getItem('verificationEmail');
+    
+    console.log('🔍 User verification status:', { isVerified, userEmail, verificationEmail });
     console.log('🔍 All localStorage keys:', Object.keys(localStorage));
     console.log('🔍 All localStorage items:', Object.fromEntries(
       Object.keys(localStorage).map(key => [key, localStorage.getItem(key)])
     ));
     
-    if (!storedEmail) {
+    // If user is already verified, redirect to main app
+    if (isVerified && userEmail) {
+      console.log('✅ User already verified, redirecting to main app');
+      showSuccessToast('You are already verified! Redirecting...');
+      setTimeout(() => {
+        navigate('/'); // or wherever your main app route is
+      }, 1500);
+      return;
+    }
+    
+    // Try to get email from different sources
+    let emailToUse = verificationEmail || userEmail;
+    
+    if (!emailToUse) {
       console.error('❌ No email found in localStorage');
       console.error('❌ This means signup failed or localStorage was cleared');
       
@@ -41,7 +59,7 @@ export default function EmailVerify() {
       
       if (emailParam) {
         console.log('🔍 Found email in URL params:', emailParam);
-        setEmail(emailParam);
+        emailToUse = emailParam;
         localStorage.setItem('verificationEmail', emailParam);
         showInfoToast('Email found in URL, proceeding with verification');
       } else {
@@ -49,10 +67,14 @@ export default function EmailVerify() {
         navigate('/register')
         return
       }
-    } else {
-      console.log('✅ Email found in localStorage:', storedEmail);
-      setEmail(storedEmail)
-      testOTPVerification(storedEmail)
+    }
+    
+    console.log('✅ Using email for verification:', emailToUse);
+    setEmail(emailToUse);
+    
+    // Only test OTP verification if we have an email
+    if (emailToUse) {
+      testOTPVerification(emailToUse);
     }
   }, [navigate, showErrorToast, showInfoToast])
 
