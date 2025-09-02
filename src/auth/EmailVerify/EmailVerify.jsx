@@ -25,29 +25,19 @@ export default function EmailVerify() {
   useEffect(() => {
     console.log('🔍 EmailVerify component mounted');
     
-    // Check if user is already verified
-    const isVerified = localStorage.getItem('emailVerified') === 'true';
+    // Check for email in localStorage
+    const storedEmail = localStorage.getItem('verificationEmail');
     const userEmail = localStorage.getItem('userEmail');
-    const verificationEmail = localStorage.getItem('verificationEmail');
     
-    console.log('🔍 User verification status:', { isVerified, userEmail, verificationEmail });
+    console.log('🔍 Stored email from localStorage:', storedEmail);
+    console.log('🔍 User email from localStorage:', userEmail);
     console.log('🔍 All localStorage keys:', Object.keys(localStorage));
     console.log('🔍 All localStorage items:', Object.fromEntries(
       Object.keys(localStorage).map(key => [key, localStorage.getItem(key)])
     ));
     
-    // If user is already verified, redirect to main app
-    if (isVerified && userEmail) {
-      console.log('✅ User already verified, redirecting to main app');
-      showSuccessToast('You are already verified! Redirecting...');
-      setTimeout(() => {
-        navigate('/'); // or wherever your main app route is
-      }, 1500);
-      return;
-    }
-    
     // Try to get email from different sources
-    let emailToUse = verificationEmail || userEmail;
+    let emailToUse = storedEmail || userEmail;
     
     if (!emailToUse) {
       console.error('❌ No email found in localStorage');
@@ -72,7 +62,7 @@ export default function EmailVerify() {
     console.log('✅ Using email for verification:', emailToUse);
     setEmail(emailToUse);
     
-    // Only test OTP verification if we have an email
+    // Test OTP verification endpoint
     if (emailToUse) {
       testOTPVerification(emailToUse);
     }
