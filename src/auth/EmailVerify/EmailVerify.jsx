@@ -24,16 +24,37 @@ export default function EmailVerify() {
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('verificationEmail')
-    if (!storedEmail) {
-      showErrorToast('No email found. Please start the verification process again.')
-      navigate('/register')
-      return
-    }
-    setEmail(storedEmail)
-    console.log('Email found in localStorage:', storedEmail)
+    console.log('🔍 EmailVerify component mounted');
+    console.log('🔍 Stored email from localStorage:', storedEmail);
+    console.log('🔍 All localStorage keys:', Object.keys(localStorage));
+    console.log('🔍 All localStorage items:', Object.fromEntries(
+      Object.keys(localStorage).map(key => [key, localStorage.getItem(key)])
+    ));
     
-    testOTPVerification(storedEmail)
-  }, [navigate, showErrorToast])
+    if (!storedEmail) {
+      console.error('❌ No email found in localStorage');
+      console.error('❌ This means signup failed or localStorage was cleared');
+      
+      // Try to get email from URL params as fallback
+      const urlParams = new URLSearchParams(window.location.search);
+      const emailParam = urlParams.get('email');
+      
+      if (emailParam) {
+        console.log('🔍 Found email in URL params:', emailParam);
+        setEmail(emailParam);
+        localStorage.setItem('verificationEmail', emailParam);
+        showInfoToast('Email found in URL, proceeding with verification');
+      } else {
+        showErrorToast('No email found. Please start the verification process again.')
+        navigate('/register')
+        return
+      }
+    } else {
+      console.log('✅ Email found in localStorage:', storedEmail);
+      setEmail(storedEmail)
+      testOTPVerification(storedEmail)
+    }
+  }, [navigate, showErrorToast, showInfoToast])
 
   useEffect(() => {
     if (resendCountdown > 0) {
