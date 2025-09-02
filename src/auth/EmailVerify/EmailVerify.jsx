@@ -36,14 +36,12 @@ export default function EmailVerify() {
       Object.keys(localStorage).map(key => [key, localStorage.getItem(key)])
     ));
     
-    // Try to get email from different sources
     let emailToUse = storedEmail || userEmail;
     
     if (!emailToUse) {
       console.error('❌ No email found in localStorage');
       console.error('❌ This means signup failed or localStorage was cleared');
       
-      // Try to get email from URL params as fallback
       const urlParams = new URLSearchParams(window.location.search);
       const emailParam = urlParams.get('email');
       
@@ -62,7 +60,6 @@ export default function EmailVerify() {
     console.log('✅ Using email for verification:', emailToUse);
     setEmail(emailToUse);
     
-    // Test OTP verification endpoint
     if (emailToUse) {
       testOTPVerification(emailToUse);
     }

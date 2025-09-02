@@ -53,7 +53,6 @@ export default function LoginScreen() {
       
       if (res.data.success) {
         showSuccessToast("Login successful! Redirecting...");
-        // Store user data if needed
         localStorage.setItem('userToken', res.data.token);
         localStorage.setItem('userEmail', email);
         
@@ -160,7 +159,7 @@ export default function LoginScreen() {
           className={errors.email ? 'border-red-500' : ''}
         />
         {errors.email && (
-          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+          <div className="text-red-500 text-sm">{errors.email}</div>
         )}
         
         <CustomLabel text="Password" />
@@ -175,7 +174,7 @@ export default function LoginScreen() {
           className={errors.password ? 'border-red-500' : ''}
         />
         {errors.password && (
-          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+          <div className="text-red-500 text-sm">{errors.password}</div>
         )}
         
         <Link to="/forgotMain">

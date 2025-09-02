@@ -82,7 +82,6 @@ export default function SignUp() {
             console.log('💾 Setting verificationEmail in localStorage:', email);
             localStorage.setItem('verificationEmail', email);
             
-            // Verify it was set
             const storedEmail = localStorage.getItem('verificationEmail');
             console.log('🔍 Verification email stored in localStorage:', storedEmail);
             console.log('🔍 localStorage keys:', Object.keys(localStorage));

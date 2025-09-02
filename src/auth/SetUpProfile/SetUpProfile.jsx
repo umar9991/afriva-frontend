@@ -22,9 +22,7 @@ export default function SetUpProfile() {
    <CustomLabel text="Country ID"/>    
    <CustomTextField placeholder="Enter Country ID"/>
    <CustomButton label='Verify' to='/setup-avatar'/>
-   <AuthRedirectText question="I already have an account!"
-  linkText="Log in"
-  onClick={() => console.log("Navigate to signup")}/>
+   
   
    </div>
   <div>
