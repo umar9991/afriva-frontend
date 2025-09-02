@@ -55,32 +55,48 @@ export default function SignUp() {
 
     setIsLoading(true);
     try {
+      console.log('🚀 Starting signup process for email:', email);
+      
       const res = await signup({ email, password, confirmPassword });
-      console.log("Signup success:", res.data);
+      console.log("✅ Signup success:", res.data);
 
       if (res.data.success) {
         showSuccessToast("Account created successfully! Sending verification code...");
+        console.log('📧 Account created, now sending verification code...');
         
         try {
           const verifyRes = await sendVerificationCode(email);
-          console.log("Verification code sent:", verifyRes.data);
+          console.log("📧 Verification code sent:", verifyRes.data);
           
           if (verifyRes.data.success) {
             showSuccessToast("Verification code sent to your email!");
+            console.log('💾 Setting verificationEmail in localStorage:', email);
             localStorage.setItem('verificationEmail', email);
-            navigate("/email-verify");
+            
+            // Verify it was set
+            const storedEmail = localStorage.getItem('verificationEmail');
+            console.log('🔍 Verification email stored in localStorage:', storedEmail);
+            console.log('🔍 localStorage keys:', Object.keys(localStorage));
+            
+            if (storedEmail === email) {
+              console.log('✅ Email successfully stored in localStorage');
+              navigate("/email-verify");
+            } else {
+              console.error('❌ Failed to store email in localStorage');
+              showErrorToast("Failed to store email. Please try again.");
+            }
           } else {
             showErrorToast(verifyRes.data.message || "Failed to send verification code");
           }
         } catch (verifyError) {
-          console.error("Verification code error:", verifyError);
+          console.error("❌ Verification code error:", verifyError);
           showErrorToast("Account created but failed to send verification code. Please try again.");
         }
       } else {
         showErrorToast(res.data.message || "Signup failed");
       }
     } catch (error) {
-      console.error("Signup error:", error.response?.data || error.message);
+      console.error("❌ Signup error:", error.response?.data || error.message);
       const errorMessage = error.response?.data?.message || "Signup failed. Please try again.";
       showErrorToast(errorMessage);
     } finally {
